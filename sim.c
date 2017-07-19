@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include "units.h"
+#include "members.h"
+#include "unitBuilder.h"
 #include "battle.h"
 
 /* opts
@@ -20,17 +21,17 @@ int main(int argc, char* argv[])
         {"members", optional_argument, NULL, 'm'}
     };
 
-    // TODO: limit unit sizes to 1000 for now, also work on passing faction array to battle function
-    int maxMembers = 1000;
     char* unitToBuild;
     int numberOfFactions = NULL;
     int arg = NULL;
     int factionNum = NULL;
-    int unitNum = 0;
     int members;
+    int unitNum;
     int factionOneUnitCount = -1;
     int factionTwoUnitCount = -1;
-    enemy* faction[1][10];
+
+    // two factions max
+    memberNode* faction[1];
 
     while((arg = getopt_long(argc, argv, shortopts, longopts, NULL)) != -1) {
         switch(arg) {
@@ -57,25 +58,13 @@ int main(int argc, char* argv[])
             break;
         case 'm':
             members = optarg;
-            if (members > maxMembers) {
-                printf("Please keep unit sizes under %d\n", maxMembers);
-                return EXIT_FAILURE;
-            }
-            faction[factionNum][unitNum] = buildUnit(unitToBuild, members);
-            if (faction[factionNum][unitNum] == NULL) {
+            faction[factionNum] = buildUnit(faction[0], unitToBuild, members);
+            if (faction[factionNum] == NULL) {
                 printf("Unit \"%s\" is not a valid unit.\n", unitToBuild);
                 return EXIT_FAILURE;
             }
             unitNum++;
             break;
-        }
-    }
-
-    battle(faction, factionOneUnitCount, factionTwoUnitCount);
-
-    for (int factionToFree = 0; factionToFree <= factionNum; factionToFree++) {
-        for (int unitToFree = 0; unitToFree < unitNum; unitToFree++) {
-            free(faction[factionToFree][unitToFree]);
         }
     }
 

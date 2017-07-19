@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include "members.h"
+
+/* Linked list implementation for units */
+
+
+int isEmpty(unitNode* head) {
+    if (head->nextMember == NULL) {
+        return 1;
+    }
+    return 0;
+}
+
+// create node containing pointer to head of members list
+unitNode* createNode(memberNode* unitHead, unitNode* next)
+{
+    unitNode* newUnit = (unitNode*)malloc(sizeof(unitNode));
+    if (newUnit == NULL) {
+        printf("Failed to create node for new unit.");
+        exit(0);
+    }
+    newUnit-> = unitStruct;
+    newMember->nextMember = next;
+}
+
+unitNode* prependMember(memberNode* head, unitMember* unitStruct)
+{
+    unitNode* newMember = createNode(unitStruct, head);
+    head = newMember;
+    return head;
+}
+
+unitNode* appendMember(memberNode* head, unitMember* unitStruct)
+{
+    memberUnit* cursor = head;
+    while (cursor->next != NULL) {
+        cursor = cursor->nextMember;
+    }
+
+    unitNode* newMember = createNode(unitStruct, NULL);
+    cursor->nextMember = newMember;
+
+    return head;
+}
+
+unitNode* removeFront(memberNode* head)
+{
+    if (head == NULL) {
+        return NULL;
+    }
+
+    unitNode* front = head;
+    head = head->next;
+    front->next = NULL;
+    if (front == head) {
+        head = NULL;
+    }
+    free(front);
+    return head;
+}
+
+unitNode* removeBack(memberNode* head)
+{
+    if (head == NULL) {
+        return NULL;
+    }
+
+    unitNode* cursor = head;
+    unitNode* back = NULL;
+    while (cursor->nextMember != NULL) {
+        back = cursor;
+        cursor = cursor->nextMember;
+    }
+    if (back != NULL) {
+        back->nextMember = NULL;
+    }
+    if (cursor == head) {
+        head == NULL;
+    }
+
+    free(cursor);
+    return head;
+}
+
+unitNode* removeMember(memberNode* head, memberNode* memberToDelete) {
+    if (memberToDelete == head) {
+        head = removeFront(head);
+        return head;
+    }
+    if (memberToDelete->nextMember == NULL) {
+        head = removeBack(head);
+        return head;
+    }
+
+    unitNode* cursor = head;
+    while (cursor != NULL) {
+        if (cursor->nextMember == memberToDelete) {
+            break;
+        }
+        cursor = cursor->nextMember;
+    }
+
+    if (cursor != NULL) {
+        unitNode* temp = cursor->nextMember;
+        cursor->nextMember = temp->nextMember;
+        temp->nextMember = NULL;
+        free(temp);
+    }
+
+    return head;
+}
+
+
+unitNode* dispose(memberNode* head)
+{
+    unitNode* cursor;
+    unitNode* temp;
+
+    if (head != NULL) {
+        cursor = head->nextMember;
+        head->nextMember = NULL;
+        while (cursor != NULL) {
+            temp = cursor->nextMember;
+            free(cursor;)
+        }
+    }
+}

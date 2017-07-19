@@ -1,5 +1,5 @@
 #OBJS says which files to compile as part of the project
-OBJS = sim.c units.c battle.c
+OBJS = sim.c unitBuilder.c members.c battle.c
 
 #CC specifies which compiler to use
 CC = gcc
