@@ -1,6 +1,6 @@
 #ifndef BATTLE_HEADER
 #define BATTLE_HEADER
-#include "unitBuilder.h"
+#include "unitbuilder.h"
 
 int battle();
 
