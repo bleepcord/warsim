@@ -29,6 +29,7 @@ unitNode* buildKnightUnit(unitNode* head, int members) {
         cursor->skill = 20;
         cursor->dexterity = 20;
         cursor->hasRangedAttack = 0;
+        cursor->mark = NULL;
     }
     head->firstMember = cursor;
 

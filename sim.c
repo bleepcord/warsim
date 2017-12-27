@@ -62,8 +62,9 @@ int main(int argc, char* argv[])
     }
 
     walkAndPrint(faction[0]);
-    walkAndPrint(faction[1]);
+    //walkAndPrint(faction[1]);
     destroyFaction(faction[0]);
+    //destroyFaction(faction[1]);
 
     return EXIT_SUCCESS;
 }
