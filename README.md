@@ -1,0 +1,2 @@
+# warsim
+CLI Battle Sim
