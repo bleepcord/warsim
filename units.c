@@ -8,7 +8,7 @@
  * of the list.
  */
 memberNode* insNode(memberNode* head) {
-    memberNode* newMember = malloc(sizeof(memberNode));
+    memberNode* newMember = malloc(sizeof(newMember));
     newMember->nextMember = head;
     head = newMember;
     return head;

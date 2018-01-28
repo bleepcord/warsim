@@ -15,7 +15,7 @@ unitNode* buildKnightUnit(unitNode* head, int members) {
     head = newUnit;
 
     memberNode* cursor = head->firstMember;
-    memberNode* newMember = NULL;
+    //memberNode* newMember = NULL; this is unused
 
     for (int i = 0; i < members; i++) {
         cursor = insNode(cursor);
@@ -39,7 +39,7 @@ unitNode* buildKnightUnit(unitNode* head, int members) {
 unitNode* buildPirateUnit(unitNode* head, int members) {
     /* Allocate space for new unit and insert to front
      */
-    unitNode* newUnit = malloc(sizeof(unitNode));
+    unitNode* newUnit = malloc(sizeof(newUnit));
     newUnit->nextUnit = head;
     head = newUnit;
 
