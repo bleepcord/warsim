@@ -2,7 +2,7 @@
 OBJS = sim.c units.c unitbuilder.c battle.c
 
 #CC specifies which compiler to use
-CC = gcc
+#CC = gcc
 
 #COMPILER_FLAGS for additional options
 COMPILER_FLAGS = -w -std=c99 -Wall -pedantic
