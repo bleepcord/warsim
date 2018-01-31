@@ -5,6 +5,7 @@
 #include "unitbuilder.h"
 #include "battle.h"
 
+// TODO: fix shitty comment formatting
 /* opts
  * -f NEW_TEAM
  * -u UNIT_NAME as string
@@ -31,13 +32,16 @@ int main(int argc, char* argv[])
     int factionTwoUnitCount = -1;
 
     // two factions max
-    unitNode* faction[1] = {NULL, NULL};
+    //unitNode* faction[1] = {NULL, NULL};
+    unitNode* faction = malloc(2 * sizeof(faction));
+    unitNode** currentFaction = NULL;
 
     int arg;
     while((arg = getopt_long(argc, argv, shortopts, longopts, NULL)) != -1) {
         switch(arg) {
         case 'f':
             factionNum++;
+	    currentFaction = &faction[factionNum];
             unitNum++;
             break;
         case 'u':
@@ -51,8 +55,8 @@ int main(int argc, char* argv[])
         case 'm':
             memberOp = optarg;
             members = atoi(memberOp);
-            faction[factionNum] = buildUnit(faction[factionNum], unitToBuild, members);
-            if (faction[factionNum] == NULL) {
+            currentFaction = buildUnit(&faction[factionNum], unitToBuild, members);
+            if (currentFaction == NULL) {
                 printf("Unit \"%s\" is not a valid unit.\n", unitToBuild);
                 return EXIT_FAILURE;
             }
@@ -61,9 +65,9 @@ int main(int argc, char* argv[])
         }
     }
 
-    walkAndPrint(faction[0]);
+    walkAndPrint(&faction[0]);
     //walkAndPrint(faction[1]);
-    destroyFaction(faction[0]);
+    destroyFaction(&faction[0]);
     //destroyFaction(faction[1]);
 
     return EXIT_SUCCESS;
